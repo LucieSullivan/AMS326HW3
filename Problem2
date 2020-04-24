@@ -1,0 +1,38 @@
+public class Problem2 {
+    //Number of times the disk is dropped
+    static double numDrop = 1984444444;
+    //Diameter of disk
+    static double diam = .75;
+    //Distance between lines
+    static double width = 1;
+    //number of times disk crosses a line
+    static int cross = 0;
+
+    public static void main(String[] args){
+        System.out.println("The number of times the disk will be dropped: " + numDrop);
+        buffon();
+        System.out.println("The number of times the disk crossed a line: "+ cross);
+        double prob = cross/numDrop;
+        System.out.println("The probability the disk will cross a line: " + prob);
+    }
+
+    public static boolean crossCheck(double L, double R){
+        if (L >= width || R <= 0) return true;
+        return false;
+    }
+
+    public static void buffon(){
+        for(int i = 1; i <= numDrop; i++){
+            //Angle in radians from rightmost parallel line
+            double theta = Math.toRadians(Math.random()*90);
+            //x coordinate of disk
+            double x = Math.random()*width;
+            //find the endpoints of the disk
+            double delt = .5 *diam * Math.sin(theta);
+            double xL = x + delt;
+            double xR = x - delt;
+            if (crossCheck(xL, xR)) cross++;
+        }
+    }
+
+}
