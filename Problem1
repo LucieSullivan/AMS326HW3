@@ -1,1 +1,44 @@
-idk yet :)
+public class Problem1 {
+
+    public static void main(String[] args){
+        System.out.println("Velocity = 7");
+        plot(euler(7));
+        System.out.println("Velocity = 14");
+        plot(euler(14));
+        System.out.println("Velocity = 21");
+        plot(euler(21));
+    }
+
+
+    public static double[] euler(int vel) {
+        //Array of points
+        double[] points = new double[7778];
+        //Variables used to calculate points
+        double yn1=0;
+        double yn = 0;
+        double xn= 7777;
+        //Variables for equations
+        double w;
+        double r;
+        double vo = 14;
+        double vb = vel;
+        //Calculates y values
+        for(int i = 0; i < 7777; i++){
+            w = 4*vo*((xn/7777)-((Math.pow(xn,2)/Math.pow(7777,2))));
+            r = vb*(xn/Math.sqrt(Math.pow(xn,2)+Math.pow(yn, 2)));
+            yn1 = Math.abs(yn + ((yn/xn) - (w/r)));
+            points[i] = yn1;
+            xn --;
+            yn= points[i];
+
+        }
+        return points;
+    }
+
+    public static void plot(double[] thing){
+        for(int i = 0; i < 7777; i= i + 101){
+            System.out.println(i + ", " + thing[i]);
+        }
+        System.out.println(7777 + ", " + thing[7777]);
+    }
+}
